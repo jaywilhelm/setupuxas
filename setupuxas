@@ -1,0 +1,28 @@
+#!/bin/bash
+set -e
+set -x
+sudo apt install openjdk-8-jre build-essential git meson ant python3 python3-pip pkg-config openjdk-8-jdk 
+sudo -H pip3 install ninja
+if [ ! -d "OpenUxAS" ] 
+then
+	git clone https://github.com/jaywilhelm/OpenUxAS.git
+fi
+if [ ! -d "OpenAMASE" ] 
+then
+git clone https://github.com/afrl-rq/OpenAMASE.git
+fi
+if [ ! -d "LmcpGen" ] 
+then
+git clone https://github.com/afrl-rq/LmcpGen.git
+fi
+cd OpenAMASE/OpenAMASE
+ant jar
+cd  ../../LmcpGen
+ant jar
+cd ../OpenUxAS
+git submodule init
+git submodule update
+sh RunLmcpGen.sh
+./prepare
+meson build_debug --buildtype=debug -D force_dep_download=true
+meson build --buildtype=release -D force_dep_download=true

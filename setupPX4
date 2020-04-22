@@ -1,0 +1,12 @@
+sudo apt install cmake libvecmath-java openjdk-8-jre openjdk-8-jdk
+pip3 install --user empy
+pip3 install --user jinja2
+pip3 install --user pyros-genmsg
+pip3 install --user packaging
+pip3 install --user toml
+pip3 install --user numpy
+
+if [ ! -d "Firmware" ] 
+then
+    git clone https://github.com/PX4/Firmware.git --recursive
+fi

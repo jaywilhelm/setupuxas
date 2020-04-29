@@ -15,6 +15,9 @@ if [ ! -d "LmcpGen" ]
 then
 	git clone https://github.com/afrl-rq/LmcpGen.git
 fi
+cd OpenUxAS
+./install_prerequisites.sh
+cd ..
 cd OpenAMASE/OpenAMASE
 ant jar
 cd  ../../LmcpGen
